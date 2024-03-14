@@ -1,15 +1,23 @@
+import { useState } from "react";
+import { FlatList } from "react-native";
 import { GroupCard } from "@components/GroupCard";
 import { Header } from "@components/Header";
 import { Highlight } from "@components/Highlight";
 import { Container } from "./styles";
 
 export function Groups() {
+  const [teams, setTeams] = useState(["Mercury", "Venus", "Earth", "Mars"]);
+
   return (
     <Container>
       <Header />
       <Highlight title="Turmas" subtitle="Jogue com a sua turma" />
 
-      <GroupCard title="Turma A" />
+      <FlatList
+        data={teams}
+        keyExtractor={(item) => item}
+        renderItem={({ item }) => <GroupCard title={item} />}
+      />
     </Container>
   );
 }
