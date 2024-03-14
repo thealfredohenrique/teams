@@ -3,10 +3,11 @@ import { FlatList } from "react-native";
 import { GroupCard } from "@components/GroupCard";
 import { Header } from "@components/Header";
 import { Highlight } from "@components/Highlight";
+import { ListEmpty } from "@components/ListEmpty";
 import { Container } from "./styles";
 
 export function Groups() {
-  const [teams, setTeams] = useState(["Mercury", "Venus", "Earth", "Mars"]);
+  const [teams, setTeams] = useState([]);
 
   return (
     <Container>
@@ -17,6 +18,10 @@ export function Groups() {
         data={teams}
         keyExtractor={(item) => item}
         renderItem={({ item }) => <GroupCard title={item} />}
+        contentContainerStyle={teams.length === 0 && { flex: 1 }}
+        ListEmptyComponent={() => (
+          <ListEmpty message="Que tal cadastrar a primeira turma?" />
+        )}
       />
     </Container>
   );
