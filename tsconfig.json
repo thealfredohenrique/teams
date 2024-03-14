@@ -18,6 +18,9 @@
       "@storage/*": [
         "./src/storage/*"
       ],
+      "@themes/*": [
+        "./src/themes/*"
+      ],
       "@utils/*": [
         "./src/utils/*"
       ],
