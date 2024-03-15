@@ -2,7 +2,7 @@ import logoImage from "@assets/logo.png";
 import { BackButton, BackIcon, Container, Logo } from "./styles";
 
 interface HeaderProps {
-  showBackButton?: false;
+  showBackButton?: boolean;
 }
 
 export function Header({ showBackButton = false }: HeaderProps) {
