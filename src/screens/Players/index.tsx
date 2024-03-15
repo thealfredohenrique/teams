@@ -5,10 +5,11 @@ import { Filter } from "@components/Filter";
 import { Header } from "@components/Header";
 import { Highlight } from "@components/Highlight";
 import { Input } from "@components/Input";
+import { PlayerCard } from "@components/PlayerCard";
 import { Container, Form, HeaderList, TeamsLength } from "./styles";
 
 export function Players() {
-  const [players, setPlayers] = useState([]);
+  const [players, setPlayers] = useState(["Alfredo", "Henrique"]);
   const [team, setTeam] = useState("Time A");
 
   return (
@@ -41,6 +42,14 @@ export function Players() {
 
         <TeamsLength>{players.length}</TeamsLength>
       </HeaderList>
+
+      <FlatList
+        data={players}
+        keyExtractor={(item) => item}
+        renderItem={({ item }) => (
+          <PlayerCard name={item} onRemove={() => {}} />
+        )}
+      />
     </Container>
   );
 }
