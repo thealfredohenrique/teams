@@ -5,7 +5,7 @@ import { Button } from "@components/Button";
 import { Header } from "@components/Header";
 import { Highlight } from "@components/Highlight";
 import { Input } from "@components/Input";
-import { groupsCreate } from "@storage/groups/groupsCreate";
+import { groupCreate } from "@storage/group/groupCreate";
 import { AppError } from "@utils/AppError";
 import { Container, Content, Icon } from "./styles";
 
@@ -19,7 +19,7 @@ export function NewGroup() {
         return Alert.alert("Nova Turma", "Informe o nome da turma.");
       }
 
-      await groupsCreate(group);
+      await groupCreate(group);
       navigation.navigate("players", { group });
     } catch (error) {
       if (error instanceof AppError) {

@@ -6,7 +6,7 @@ import { GroupCard } from "@components/GroupCard";
 import { Header } from "@components/Header";
 import { Highlight } from "@components/Highlight";
 import { ListEmpty } from "@components/ListEmpty";
-import { groupsGetAll } from "@storage/groups/groupsGetAll";
+import { groupGetAll } from "@storage/group/groupGetAll";
 import { Container } from "./styles";
 
 export function Groups() {
@@ -19,7 +19,7 @@ export function Groups() {
 
   async function fetchGroups() {
     try {
-      const data = await groupsGetAll();
+      const data = await groupGetAll();
       setTeams(data);
     } catch (error) {
       console.error(error);
