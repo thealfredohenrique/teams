@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { Alert, FlatList, TextInput } from "react-native";
-import { useRoute } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 import { Button } from "@components/Button";
 import { ButtonIcon } from "@components/ButtonIcon";
 import { Filter } from "@components/Filter";
@@ -9,6 +9,7 @@ import { Highlight } from "@components/Highlight";
 import { Input } from "@components/Input";
 import { ListEmpty } from "@components/ListEmpty";
 import { PlayerCard } from "@components/PlayerCard";
+import { groupRemoveByName } from "@storage/group/groupRemoveByName";
 import { playerAddByGroup } from "@storage/player/playerAddByGroup";
 import { playerGetByGroupAndTeam } from "@storage/player/playerGetByGroupAndTeam";
 import { playerRemoveByGroup } from "@storage/player/playerRemoveByGroup";
@@ -28,6 +29,7 @@ export function Players() {
   const newPlayerNameInputRef = useRef<TextInput>(null);
 
   const route = useRoute();
+  const navigation = useNavigation();
   const { group } = route.params as RouteParams;
 
   async function handleAddPlayer() {
@@ -70,6 +72,23 @@ export function Players() {
         "Não foi possível remover o participante."
       );
     }
+  }
+
+  async function groupRemove() {
+    try {
+      groupRemoveByName(group);
+      navigation.navigate("groups");
+    } catch (error) {
+      console.error(error);
+      Alert.alert("Remover Grupo", "Não foi possível remover o grupo.");
+    }
+  }
+
+  async function handleGroupRemove() {
+    Alert.alert("Remover Grupo", "Deseja remover o grupo?", [
+      { text: "Não", style: "cancel" },
+      { text: "Sim", onPress: () => groupRemove() },
+    ]);
   }
 
   async function fetchPlayersByTeam() {
@@ -144,7 +163,11 @@ export function Players() {
         ]}
       />
 
-      <Button title="Remover turma" type="secondary" />
+      <Button
+        title="Remover turma"
+        type="secondary"
+        onPress={handleGroupRemove}
+      />
     </Container>
   );
 }
